@@ -1,7 +1,7 @@
 const canvasSketch = require('canvas-sketch');
 
 const settings = {
-  dimensions: ['2048', '2048'],
+  dimensions: ['200', '200'],
 };
 
 const sketch = () => {
@@ -15,11 +15,23 @@ const sketch = () => {
         points.push([ u, v ]);
       }
     }
+
+    return points;
   }
+  const points = createGrid();
 
   return ({ context, width, height }) => {
     context.fillStyle = 'white';
     context.fillRect(0,0,width, height);
+
+    points.forEach(([ u, v ]) => {
+      const x = u * width;
+      const y = v * height;
+      context.strokeStyle = 'black';
+      context.beginPath();
+      context.arc(x, y, 200, 0, Math.PI * 2, false);
+      context.stroke();  
+    });
   }
 };
 
