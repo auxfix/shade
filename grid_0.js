@@ -10,8 +10,8 @@ const sketch = () => {
     const count = 5;
     for( let x = 0; x < 5; x++){
       for( let y = 0; y < 5; y++){
-        const u = x / count;
-        const v = y / count;
+        const u = count <= 1 ? 0.5 : x / (count - 1);
+        const v = count <= 1 ? 0.5 : y / (count - 1);
         points.push([ u, v ]);
       }
     }
@@ -29,7 +29,8 @@ const sketch = () => {
       const y = v * height;
       context.strokeStyle = 'black';
       context.beginPath();
-      context.arc(x, y, 200, 0, Math.PI * 2, false);
+      context.lineWidth = 20;
+      context.arc(x, y, 100, 0, Math.PI * 2, false);
       context.stroke();  
     });
   }
