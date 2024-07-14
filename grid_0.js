@@ -1,8 +1,11 @@
 const canvasSketch = require('canvas-sketch');
+const { lerp } = require('canvas-sketch-util/math');
 
 const settings = {
   dimensions: ['200', '200'],
 };
+
+const margin = 400;
 
 const sketch = () => {
   const createGrid = () => {
@@ -25,8 +28,8 @@ const sketch = () => {
     context.fillRect(0,0,width, height);
 
     points.forEach(([ u, v ]) => {
-      const x = u * width;
-      const y = v * height;
+      const x = lerp(margin, width - margin, u);
+      const y = lerp(margin, height - margin, v);
       context.strokeStyle = 'black';
       context.beginPath();
       context.lineWidth = 20;
